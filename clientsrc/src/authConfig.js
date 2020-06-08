@@ -1,3 +1,3 @@
-export const domain = "mack-demo.auth0.com";
-export const audience = "https://BoredsApi";
-export const clientId = "U8eeagQ7gAojCBGzHp9XjBbREpYdHkiY";
+export const domain = "codeworksclassroom.auth0.com";
+export const audience = "https://codeworksclassroom.com";
+export const clientId = "pOXw2OGv1LsYi7LEBmDF04RLkXQvldml";
