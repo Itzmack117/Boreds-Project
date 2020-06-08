@@ -1,8 +1,23 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <router-link class="navbar-brand" :to="{ name: 'home' }"
-      >Kanban</router-link
-    >
+    <router-link class="navbar-brand d-flex" :to="{ name: 'home' }"
+      >
+      <div class="d-flex flex-column align-items-center">
+        <img
+          alt="Vue logo"
+          src="../assets/logo.png"
+          style="transform: rotate(-90deg);width: 25px;"
+        />
+        <img
+          alt="Vue logo"
+          src="../assets/logo.png"
+          style="transform: rotate(-90deg);width: 25px;margin-top: -10px;"
+        />
+      </div>
+      <div>
+        <h3 class="text-success">oreds</h3>
+      </div>
+      </router-link>
     <button
       class="navbar-toggler"
       type="button"
