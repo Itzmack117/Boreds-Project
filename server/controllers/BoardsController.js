@@ -4,7 +4,7 @@ import auth0provider from "@bcwdev/auth0provider";
 import { boardService } from '../services/BoardService'
 
 
-// test
+
 //PUBLIC
 export class BoardsController extends BaseController {
   constructor() {
@@ -57,5 +57,3 @@ export class BoardsController extends BaseController {
     } catch (error) { next(error) }
   }
 }
-
-
