@@ -15,7 +15,7 @@
         />
       </div>
       <div>
-        <h3 class="text-success">oreds</h3>
+        <h3 class="text-warning">oreds</h3>
       </div>
       </router-link>
     <button
@@ -42,7 +42,7 @@
           :class="{ active: $route.name == 'boards' }"
         >
           <router-link class="nav-link" :to="{ name: 'boards' }"
-            >My-Dashboard</router-link
+            >My Boreds</router-link
           >
         </li>
       </ul>
