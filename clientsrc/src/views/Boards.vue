@@ -23,7 +23,7 @@
               <div class="col-12 pb-3 border-bottom border-success">
               <div class="form-group">
                 <input type="text" name="" id="" class="form-control col-10 m-2" placeholder="New Board Title..." aria-describedby="helpId" v-model="newBoard.title">
-                <button type="submit" class="m-2 btn btn-warning">Submit</button>
+                <button type="submit" class="m-2 btn btn-warning"><i class="text-success fas fa-plus"></i></button>
               </div>
               </div>
             </form>
@@ -51,7 +51,7 @@
     <div class="row top-pad">
     </div>
     <div class="row banner">
-      <div class="col-12 card shadow">
+      <div class="col-12 card long-boy shadow">
         <div class="row bubble-boy">
           <div class="col-6 shadow mx-auto bg-warning rounded-pill text-center text-white">
               <h1>Board Title</h1>
@@ -59,17 +59,17 @@
         </div>
         
         <div class="row">
-          <div class="col-12 mt-5 text-center">
+          <!-- <div class="col-12 mt-5 text-center">
             <h6>Create a new list column</h6>
-          </div>
+          </div> -->
           
-          <div class="col-12 mb-4 text-center">
+          <div class="col-12 my-5 text-center">
             <div class="row">
             <form class="form-inline col-12" @submit.prevent="createTask">
               <div class="col-12 pb-3 border-bottom border-success">
               <div class="form-group">
-                <input type="text" name="title" id="title" class="form-control col-10 m-2" placeholder="New List Column..." aria-describedby="helpId" >
-                <button type="submit" class="ml-5 my-2 btn btn-warning">Submit</button>
+                <input type="text" name="title" id="title" class="form-control col-11 m-2" placeholder="New List Column..." aria-describedby="helpId" >
+                <button type="submit" class="ml-5 my-2 btn btn-warning"><i class="text-success fas fa-plus"></i></button>
               </div>
               </div>
             </form>
@@ -78,31 +78,13 @@
         </div>
 
         <div class="row">
-          <div class="col-3 list-container bg-secondary"></div>
+          <div class="col-3 mx-1 list-container rounded border border-danger bg-secondary">
+            text goes here
+          </div>
         </div>
 
       </div>
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 </div>
 
@@ -190,6 +172,9 @@ export default {
 }
 .list-container{
   height: 100%;
+}
+.long-boy{
+  height: 85vh;
 }
 .text-left{
   text-align: left;
