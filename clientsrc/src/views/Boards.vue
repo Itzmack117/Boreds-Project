@@ -60,6 +60,10 @@
         
         <div class="row">
 
+          <!-- <div class="col-12 mt-5 text-center">
+            <h6>Create a new list column</h6>
+          </div> -->
+
           
           <div class="col-12 my-5 text-center">
             <div class="row">
