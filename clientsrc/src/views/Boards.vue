@@ -104,10 +104,10 @@
                     />
                   </div>
                   <div class="form-group align-self-center">
-                    <button type="submit" class="text-success shadow mr-1 ml-2 btn btn-warning">
+                    <button type="submit" class="border border-success text-success shadow mr-1 ml-2 btn btn-warning">
                       <i class="fas fa-plus"></i> Add Task
                     </button>
-                    <button type="button" class="text-success shadow ml-1 btn btn-warning">
+                    <button type="button" class="border border-success text-success shadow ml-1 btn btn-warning">
                       <i class="fas fa-times"></i> Cancel
                     </button>
                   </div>
@@ -143,15 +143,15 @@
                           type="text"
                           name="title"
                           id="title"
-                          class="form-control shadow"
+                          class="form-control "
                           placeholder="new comment.."
                         />
                       </div>
                       <div class="form-group align-self-center">
-                        <button type="submit" class="text-warning shadow m-auto btn btn-success">
+                        <button type="submit" class="border border-warning text-warning shadow m-auto btn btn-success">
                           <i class="fas fa-plus"></i> Comment
                         </button>
-                        <button type="button" class="text-warning shadow m-auto btn btn-success">
+                        <button type="button" class="border border-warning text-warning shadow m-auto btn btn-success">
                           <i class="fas fa-times"></i> Cancel
                         </button>
                       </div>
