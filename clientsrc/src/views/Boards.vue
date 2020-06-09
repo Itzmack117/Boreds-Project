@@ -44,10 +44,6 @@
       <router-link :to="{name: 'board', params: {boardId: board.id}}">{{board.title}}</router-link>
     </div>
   </div>
-
-
-
-  
 </template>
 
 <script>

@@ -55,3 +55,32 @@ export default {
 }
 }
 </script>
+<style scoped>
+.boards {
+  font-family: "Source Sans Pro", sans-serif;
+}
+.top-pad {
+  height: 5vh;
+}
+.bubble-boy {
+  position: absolute;
+  width: 100%;
+  top: -25px;
+}
+.banner {
+  position: relative;
+  height: 20vh;
+}
+.list-container {
+  height: 100%;
+}
+.long-boy {
+  height: 85vh;
+}
+.pointer {
+  cursor: pointer;
+}
+.text-left {
+  text-align: left;
+}
+</style>
