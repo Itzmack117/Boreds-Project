@@ -1,39 +1,6 @@
 <template>
-  <div class="board container-fluid">
-    <div class="row top-pad"></div>
-    <div class="row banner">
-      <div class="col-12 card long-boy shadow">
-        <div class="row bubble-boy">
-          <div class="col-6 shadow mx-auto bg-warning rounded-pill text-center text-white">
-            <h1>Board Title</h1>
-          </div>
-        </div>
 
-        <div class="row">
-          <div class="col-12 my-5 text-center">
-            <div class="row">
-              <form class="form-inline col-12" @submit.prevent="createList">
-                <div class="col-12 pb-3 border-bottom border-success">
-                  <div class="form-group">
-                    <input
-                      type="text"
-                      name="title"
-                      id="title"
-                      class="form-control col-11 m-2"
-                      placeholder="New List Column..."
-                      aria-describedby="helpId"
-                    />
-                    <button type="submit" class="ml-5 my-2 btn btn-warning">
-                      <i class="text-success fas fa-plus"></i>
-                    </button>
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-
-        <div class="row text-left">
+ <div class="list-component row text-left">
           <div class="col-3 shadow mx-1 list-container rounded border border-danger bg-secondary">
             <div class="row mt-2">
               <div class="col-7">
@@ -69,6 +36,7 @@
               </div>
             </div>
             <hr />
+            
             <div class="row" id="this is for the tasks">
               <div class="col-10 card shadow mx-auto my-2 pt-2">
                 <div class="row">
@@ -120,21 +88,19 @@
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-  </div>
+        </div> 
+
 </template>
 
 <script>
 export default {
-  name: "board",
-  computed: {
-    board() {
-      //FIXME This does not work on page reload because the activeBoard is empty in the store
-      return this.$store.state.activeBoard;
-    }
+  name: "ListComponent",
+  data(){},
+  computed:{},
+  methods:{},
+  components:{
+    TaskComponent,
   },
-  props: ["boardId"]
-};
+  
+}
 </script>
