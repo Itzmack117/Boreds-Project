@@ -42,8 +42,10 @@
     name: "board",
     data() {
       return {
-        newList: {}
-      };
+        newList: {
+          boardId: this.$route.params.boardId
+        },
+      }
     },
     computed: {
       board() {
