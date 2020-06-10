@@ -70,6 +70,7 @@ export default new Vuex.Store({
           dispatch('getBoards')
         })
     },
+
     async getBoardById({ commit, dispatch }, id) {
       try {
         let res = await api.get('boards/' + id)
@@ -82,13 +83,15 @@ export default new Vuex.Store({
 
 
     //#region -- LISTS --
-    async createList({ commit, dispatch }, boardId) {
-      try {
-        let res = await api.post('boards/' + boardId)
-      } catch (error) {
-        console.error(error)
-      }
-    }
+    getListsByBoardId({ commit, dispatch }, boardId) {
+      api.get('lists/' + boardId)
+        .then(res => {
+          console.log(res)
+          commit('lists', res.data.lists)
+        })
+    },
+
+    
 
 
     //#endregion
