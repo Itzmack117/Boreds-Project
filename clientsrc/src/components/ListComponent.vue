@@ -1,6 +1,6 @@
 <template>
-  <div class="list-component row text-left">
-    <div class="col-3 shadow mx-1 list-container rounded border border-danger bg-secondary">
+  <div class="ListComponent row text-left">
+    <div class="col-12 shadow mx-1 list-container rounded border border-danger bg-secondary">
       <div class="row mt-2">
         <div class="col-7">
           <p>List title</p>

@@ -5,7 +5,7 @@
       <div class="col-12 card long-boy shadow">
         <div class="row bubble-boy">
           <div class="col-6 shadow mx-auto bg-warning rounded-pill text-center text-white">
-            <h1>Board Title</h1>
+            <h1>{{board.title}}</h1>
           </div>
         </div>
 
@@ -33,8 +33,9 @@
             </div>
           </div>
         </div>
-        <ListComponent v-for"list in lists" :key="list.id"/>
-          
+        <div class="row">
+          <div class="col-3"  v-for="list in board.lists" :key="list.id">
+            <ListComponent/>
           </div>
         </div>
       </div>
@@ -43,30 +44,33 @@
 </template>
 
 <script>
-import ListComponent from "../components/ListComponent"
+import ListComponent from "../components/ListComponent";
 export default {
   name: "board",
- data(){
-   return{
-     
-     newList: {}
-   }
- },
+  data() {
+    return {
+      newList: {}
+    };
+  },
   computed: {
     board() {
       //FIXME This does not work on page reload because the activeBoard is empty in the store
-      return this.$store.state.activeBoard
-    },
+      return this.$store.state.activeBoard;
+    }
   },
   methods: {
-    createTask(){
+    createList() {
       this.$store.dispatch("createList", this.newList);
       this.newList = {};
     }
   },
+  mounted(){
+    this.$store.dispatch("getBoardById", this.$route.params.boardId);
+    
+  },
   props: ["boardId"],
   components: {
-    ListComponent,
+    ListComponent
   }
 };
 </script>
