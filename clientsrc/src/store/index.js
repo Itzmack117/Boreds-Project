@@ -36,6 +36,9 @@ export default new Vuex.Store({
     },
     setActiveBoard(state, data) {
       state.activeBoard = data
+    },
+    addList(state, data) {
+      state.lists.push(data)
     }
   },
   actions: {
@@ -90,9 +93,15 @@ export default new Vuex.Store({
           commit('lists', res.data.lists)
         })
     },
+    async createList({ commit, dispatch }, newlist) {
+      try {
+        let res = await api.post('boards/' + newlist.boardId)
+        commit('addList', res.data)
+      } catch (error) {
+        console.error(error)
+      }
 
-    
-
+    }
 
     //#endregion
   }

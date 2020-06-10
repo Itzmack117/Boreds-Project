@@ -8,7 +8,7 @@ import { listService } from '../services/ListsService'
 //PUBLIC
 export class ListsController extends BaseController {
     constructor() {
-        super("api/lists")
+        super("api/boards/")
         this.router
             .use(auth0provider.getAuthorizedUserInfo)
             .get('/:id', this.getListsByBoardId)
