@@ -13,7 +13,7 @@ class DbContext {
   Boards = mongoose.model("Board", BoardSchema);
   Lists = mongoose.model("List", ListSchema);
   Tasks = mongoose.model("Task", TaskSchema);
-  Comments = mongoose.model("Task", CommentSchema);
+  Comments = mongoose.model("Comment", CommentSchema);
 }
 
 export const dbContext = new DbContext();

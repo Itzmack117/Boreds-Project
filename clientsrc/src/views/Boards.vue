@@ -1,5 +1,5 @@
 <template>
-  <!-- <div class="boards container-fluid">
+  <div class="boards container-fluid">
     <div class="row top-pad">
     </div>
     <div class="row banner">
@@ -30,10 +30,10 @@
             </div>
           </div>
           
-          <div class="col-12 text-left pl-5 my-2"                       id="this will have a v-for / no BoardsComponent">
-            <h6 class="my-2"                                                        id="these h6's will be router-links to board page">
-              Board Title
-            </h6>
+          <div class="col-12 text-left pl-5 my-2" v-for="board in boards" :key="board.id">
+            <router-link :to="{name: 'board', params: {boardId: board.id}}" class="my-2">
+              {{board.title}}
+            </router-link>
           </div>
 
         </div>
@@ -43,91 +43,11 @@
     <div v-for="board in boards" :key="board.id">
       <router-link :to="{name: 'board', params: {boardId: board.id}}">{{board.title}}</router-link>
     </div>
-  </div> -->
-
-
-
-<div class="board container-fluid">
-    <div class="row top-pad">
-    </div>
-    <div class="row banner">
-      <div class="col-12 card long-boy shadow">
-        <div class="row bubble-boy">
-          <div class="col-6 shadow mx-auto bg-warning rounded-pill text-center text-white">
-              <h1>Board Title</h1>
-          </div>
-        </div>
-        
-        <div class="row">
-          <!-- <div class="col-12 mt-5 text-center">
-            <h6>Create a new list column</h6>
-          </div> -->
-          
-          <div class="col-12 my-5 text-center">
-            <div class="row">
-            <form class="form-inline col-12" @submit.prevent="createTask">
-              <div class="col-12 pb-3 border-bottom border-success">
-              <div class="form-group">
-                <input type="text" name="title" id="title" class="form-control col-11 m-2" placeholder="New List Column..." aria-describedby="helpId" >
-                <button type="submit" class="ml-5 my-2 btn btn-warning"><i class="text-success fas fa-plus"></i></button>
-              </div>
-              </div>
-            </form>
-            </div>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-3 mx-1 list-container rounded border border-danger bg-secondary">
-            text goes here
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  </div>
 </template>
 
 <script>
+
 export default {
   name: "boards",
   mounted() {
@@ -137,7 +57,7 @@ export default {
     return {
       newBoard: {
         title: "",
-        description: ""
+        description: "a board"
       }
     };
   },
@@ -147,36 +67,41 @@ export default {
     }
   },
   methods: {
-    addBoard() {
-      this.$store.dispatch("addBoard", this.newBoard);
-      this.newBoard = { title: "", description: "" };
+    createBoard() {
+      this.$store.dispatch("createBoard", this.newBoard);
+      this.newBoard = { title: "", description: "a board" };
     }
+  },
+  components:{
   }
 };
 </script>
 <style scoped>
-.boards{
-  font-family: 'Source Sans Pro', sans-serif;
+.boards {
+  font-family: "Source Sans Pro", sans-serif;
 }
-.top-pad{
+.top-pad {
   height: 5vh;
 }
-.bubble-boy{
+.bubble-boy {
   position: absolute;
   width: 100%;
   top: -25px;
 }
-.banner{
+.banner {
   position: relative;
   height: 20vh;
 }
-.list-container{
+.list-container {
   height: 100%;
 }
-.long-boy{
+.long-boy {
   height: 85vh;
 }
-.text-left{
+.pointer {
+  cursor: pointer;
+}
+.text-left {
   text-align: left;
 }
 </style>
