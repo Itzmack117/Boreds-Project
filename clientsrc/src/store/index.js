@@ -18,7 +18,8 @@ export default new Vuex.Store({
   state: {
     user: {},
     boards: [],
-    activeBoard: {}
+    activeBoard: {},
+
   },
   mutations: {
     setUser(state, user) {
@@ -26,6 +27,9 @@ export default new Vuex.Store({
     },
     setBoards(state, boards) {
       state.boards = boards
+    },
+    addBoard(state, data){
+      state.boards.push(data)
     }
   },
   actions: {
@@ -54,7 +58,7 @@ export default new Vuex.Store({
           commit('setBoards', res.data)
         })
     },
-    addBoard({ commit, dispatch }, boardData) {
+    createBoard({ commit, dispatch }, boardData) {
       api.post('boards', boardData)
         .then(serverBoard => {
           dispatch('getBoards')

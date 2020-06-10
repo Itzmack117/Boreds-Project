@@ -57,7 +57,7 @@ export default {
     return {
       newBoard: {
         title: "",
-        description: ""
+        description: "a board"
       }
     };
   },
@@ -67,9 +67,9 @@ export default {
     }
   },
   methods: {
-    addBoard() {
-      this.$store.dispatch("addBoard", this.newBoard);
-      this.newBoard = { title: "", description: "" };
+    createBoard() {
+      this.$store.dispatch("createBoard", this.newBoard);
+      this.newBoard = { title: "", description: "a board" };
     }
   },
   components:{

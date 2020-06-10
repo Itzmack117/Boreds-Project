@@ -33,7 +33,7 @@
             </div>
           </div>
         </div>
-        <list-component v-for"list in lists" :key="list.id"/>
+        <ListComponent v-for"list in lists" :key="list.id"/>
           
           </div>
         </div>
