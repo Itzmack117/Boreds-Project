@@ -8,20 +8,13 @@ import { listService } from '../services/ListsService'
 //PUBLIC
 export class ListsController extends BaseController {
     constructor() {
-        super("api/boards/")
+        super("api/lists/")
         this.router
             .use(auth0provider.getAuthorizedUserInfo)
-            .get('/:id', this.getListsByBoardId)
+            // .get('/:boardId', this.getListsByBoardId)
             .post('', this.createList)
             .put('/:id', this.editList)
             .delete('/:id', this.deleteList)
-    }
-
-    async getListsByBoardId(req, res, next) {
-        try {
-            let data = await listService.getListsByBoardId(req.params.id, req.userInfo.email)
-            return res.send(data)
-        } catch (error) { next(error) }
     }
 
     async createList(req, res, next) {
