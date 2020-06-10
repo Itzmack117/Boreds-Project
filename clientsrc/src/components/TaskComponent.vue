@@ -1,27 +1,30 @@
 <template>
             <div class="row" id="this is for the tasks">
+              
               <div class="col-10 card shadow mx-auto my-2 pt-2">
+                
                 <div class="row">
                   <div class="col-8">
                     <p>task title</p>
-                  </div>
+                  </div>                  
                   <div class="col-4">
                     <span>
-                      <i class="pointer text-warning fas fa-comment-dots mx-2"></i>
+                      <i class="pointer text-warning fas fa-comment-dots mx-2" @click="commentForm =! commentForm"></i>
                       <i class="pointer text-warning fas fa-trash-alt"></i>
                     </span>
                   </div>
                 </div>
+                
                 <div class="row">
                   <div class="col-12">
                     <small>added by: user</small>
-                  <hr />
+                    <hr />
                   </div>
-
                 </div>
-                <div class="row">
+
+                <div class="row" v-if="commentForm">
                   <div class="col-12">
-                    <form class="form col-12 d-flex flex-column" @submit.prevent="createTask">
+                    <form class="form col-12 d-flex flex-column" @submit.prevent="createComment">
                       <div class="form-group">
                         <input
                           type="text"
@@ -29,29 +32,42 @@
                           id="title"
                           class="form-control "
                           placeholder="new comment.."
+                          v-model="newComment.title"
                         />
                       </div>
                       <div class="form-group align-self-center">
                         <button type="submit" class="border border-warning text-warning shadow m-auto btn btn-success">
                           <i class="fas fa-plus"></i> Comment
                         </button>
-                        <button type="button" class="border border-warning text-warning shadow m-auto btn btn-success">
+                        <button @click="commentForm = false" type="button" class="border border-warning text-warning shadow m-auto btn btn-success">
                           <i class="fas fa-times"></i> Cancel
                         </button>
                       </div>
                     </form>
                   </div>
                 </div>
+              </div>
+            </div>
 </template>
 
 <script>
 export default {
   name: "TaskComponent",
-    data(){},
+    data(){
+      return{
+        commentForm: false,
+        newComment: {}
+      }
+    },
   computed:{},
-  methods:{},
+  methods:{
+    createComment(){
+      this.$store.dispatch("createComment", this.newComment);
+      this.newComment = {};
+    }
+  },
   components:{
-    CommentComponent,
+    
 }
 }
 </script>

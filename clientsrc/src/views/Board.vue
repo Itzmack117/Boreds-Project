@@ -22,6 +22,7 @@
                       class="form-control col-11 m-2"
                       placeholder="New List Column..."
                       aria-describedby="helpId"
+                      v-model="newList.title"
                     />
                     <button type="submit" class="ml-5 my-2 btn btn-warning">
                       <i class="text-success fas fa-plus"></i>
@@ -42,13 +43,13 @@
 </template>
 
 <script>
-import TaskComponent from "../components/TaskComponent"
+import ListComponent from "../components/ListComponent"
 export default {
   name: "board",
  data(){
    return{
-     taskForm: false,
-     newTask: {}
+     
+     newList: {}
    }
  },
   computed: {
@@ -59,13 +60,13 @@ export default {
   },
   methods: {
     createTask(){
-      this.$store.dispatch("createTask", this.newTask);
-      this.newTask = {};
+      this.$store.dispatch("createList", this.newList);
+      this.newList = {};
     }
   },
   props: ["boardId"],
   components: {
-    TaskComponent,
+    ListComponent,
   }
 };
 </script>

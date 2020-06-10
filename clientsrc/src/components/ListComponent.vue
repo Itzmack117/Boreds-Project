@@ -43,7 +43,7 @@
       </div>
       <hr />
 
-      <div class="row" id="this is for the tasks">
+      <!-- <div class="row" id="this is for the tasks">
         <div class="col-10 card shadow mx-auto my-2 pt-2">
           <div class="row">
             <div class="col-8">
@@ -97,12 +97,14 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
+
     </div>
   </div>
 </template>
 
 <script>
+import TaskComponent from "../components/TaskComponent"
 export default {
   name: "ListComponent",
   data() {
