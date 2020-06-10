@@ -64,18 +64,21 @@ export default new Vuex.Store({
           dispatch('getBoards')
         })
     },
-    getListsByBoard({ commit, dispatch }, boardId) {
+
+    //#endregion
+
+
+    //#region -- LISTS --
+    getListsByBoardId({ commit, dispatch }, boardId) {
       api.get('lists/' + boardId)
         .then(res => {
           console.log(res)
           commit('lists', res.data.lists)
         })
+    },
+    createList({ commit, dispatch }, boardId) {
+
     }
-    //#endregion
-
-
-    //#region -- LISTS --
-
 
 
     //#endregion
