@@ -32,7 +32,7 @@
         </div>
       </div>
       <hr />
-      <taskcomponent v-for="task in tasks" :tasksProp="task" />
+      <TaskComponent v-for="task in tasks" :key="task.id" :tasksProp="task" />
     </div>
   </div>
 </template>
