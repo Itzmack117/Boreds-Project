@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import Axios from 'axios'
 import router from '../router/index'
+import { get } from 'mongoose'
 
 Vue.use(Vuex)
 
@@ -40,9 +41,13 @@ export default new Vuex.Store({
     setActiveBoard(state, data) {
       state.activeBoard = data
     },
+    deleteBoard(state, id) {
+      state.boards = state.boards.filter(b => b.id != id)
+    },
     addList(state, data) {
+      console.log(state.lists)
       state.lists.push(data)
-    }
+    },
   },
   actions: {
     //#region -- AUTH STUFF --
@@ -85,6 +90,15 @@ export default new Vuex.Store({
         console.error(error)
       }
     },
+    async deleteBoard({ commit, dispatch }, id) {
+      try {
+        let res = await api.delete('boards/' + id)
+        commit("deleteBoard", res.data)
+        router.push({ name: "boards" });
+      } catch (error) {
+        console.log(error);
+      }
+    },
     //#endregion
 
 
@@ -92,14 +106,13 @@ export default new Vuex.Store({
     getListsByBoardId({ commit, dispatch }, boardId) {
       api.get('boards/' + boardId + "/lists")
         .then(res => {
-          console.log(res)
-          commit('setLists', res.data.lists)
+          commit('setLists', res.data)
         })
     },
     async createList({ commit, dispatch }, newlist) {
       try {
         let res = await api.post('lists/', newlist)
-        commit('addList', res.data)
+        dispatch('getListsByBoardId', newlist.boardId)
       } catch (error) {
         console.error(error)
       }

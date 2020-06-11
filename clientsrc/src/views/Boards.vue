@@ -70,7 +70,7 @@
       createBoard() {
         this.$store.dispatch("createBoard", this.newBoard);
         this.newBoard = { title: "" };
-      }
+      },
     },
     components: {
     }

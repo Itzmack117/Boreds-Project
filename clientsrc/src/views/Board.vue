@@ -5,7 +5,9 @@
       <div class="col-12 card long-boy shadow">
         <div class="row bubble-boy">
           <div class="col-6 shadow mx-auto bg-warning rounded-pill text-center text-white">
-            <h1>{{board.title}}</h1>
+            <div>
+              <h1>{{board.title}}</h1><button class="btn btn-danger float-right" @click="deleteBoard">DELETE</button>
+            </div>
           </div>
         </div>
 
@@ -27,9 +29,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-3" v-for="list in board.lists" :key="list.id">
-            <ListComponent />
-          </div>
+          <ListComponent v-for="list in lists" :key="list.id" :listProp="list" />
         </div>
       </div>
     </div>
@@ -51,12 +51,19 @@
       board() {
         //FIXME This does not work on page reload because the activeBoard is empty in the store
         return this.$store.state.activeBoard;
+      },
+      lists() {
+        return this.$store.state.lists
       }
     },
     methods: {
       createList() {
+        console.log(this.newList)
         this.$store.dispatch("createList", this.newList);
-        this.newList = {};
+        this.newList = { boardId: this.$route.params.boardId, };
+      },
+      deleteBoard() {
+        this.$store.dispatch("deleteBoard", this.$route.params.boardId)
       }
     },
     mounted() {
