@@ -8,7 +8,7 @@
         <div class="col-5">
           <span>
             <i class="pointer text-warning fas fa-plus mx-2" @click="taskForm =! taskForm"></i>
-            <i class="pointer mx-2 fas fa-chevron-circle-right text-warning"></i>
+
             <!-- TODO Wire this up to delete -->
             <i class="pointer ml-2 fas fa-trash-alt text-warning" @click="deleteList"></i>
           </span>
@@ -43,7 +43,7 @@
     name: "ListComponent",
     props: ["listProp"],
     mounted() {
-      this.$store.dispatch("getTasksByListId")
+      this.$store.dispatch("getTasksByListId", this.listProp.id)
     },
     data() {
       return {

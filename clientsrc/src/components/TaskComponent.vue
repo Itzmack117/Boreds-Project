@@ -5,19 +5,20 @@
 
       <div class="row">
         <div class="col-8">
-          <p>task title</p>
+          <p>{{tasksProp.title}}</p>
         </div>
         <div class="col-4">
           <span>
             <i class="pointer text-warning fas fa-comment-dots mx-2" @click="commentForm =! commentForm"></i>
-            <i class="pointer text-warning fas fa-trash-alt"></i>
+            <i class="pointer mx-2 fas fa-chevron-circle-right text-warning"></i>
+            <i class="pointer text-warning fas fa-trash-alt" @click="deleteTask"></i>
           </span>
         </div>
       </div>
 
       <div class="row">
         <div class="col-12">
-          <small>added by: user</small>
+          <small>{{tasksProp.creatorEmail}}</small>
           <hr />
         </div>
       </div>
@@ -48,7 +49,7 @@
 <script>
   export default {
     name: "TaskComponent",
-    props: "tasksProp",
+    props: ["tasksProp"],
     data() {
       return {
         commentForm: false,
@@ -57,6 +58,9 @@
     },
     computed: {},
     methods: {
+      deleteTask() {
+        this.$store.dispatch("deleteTask", this.tasksProp)
+      },
       createComment() {
         this.$store.dispatch("createComment", this.newComment);
         this.newComment = {};
