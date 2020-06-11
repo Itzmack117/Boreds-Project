@@ -54,7 +54,8 @@ export default new Vuex.Store({
       // NOTE we want to add a property to the dictionary where the key is listID and the value is the array of tasks for that list
       // state.tasks[data.listId] = data.tasks
       Vue.set(state.tasks, data.listId, data.tasks)
-    }
+    },
+
   },
   actions: {
     //#region -- AUTH STUFF --
@@ -143,7 +144,8 @@ export default new Vuex.Store({
     async getTasksByListId({ commit, dispatch }, listId) {
       try {
         let res = await api.get('lists/' + listId + "/tasks")
-        commit("setTasks", { listId, tasks: res.data })
+        console.log(res.data)
+        commit("setTasks", { listId, tasks: res.data, comments: res.data.comments })
       } catch (error) {
         console.error(error)
       }
@@ -157,5 +159,32 @@ export default new Vuex.Store({
       }
 
     },
+    async deleteTask({ commit, dispatch }, task) {
+      try {
+        let res = await api.delete('tasks/' + task.id)
+        commit("setTasks", res.data)
+        dispatch('getTasksByListId', task.listId)
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+    async createComment({ commit, dispatch }, comment) {
+      try {
+        let res = await api.post('tasks/' + comment.taskId + "/comments", comment)
+        //commit("setComments", res.data)
+        dispatch('getTasksByListId', res.data.listId)
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async deleteComment({ commit, dispatch }, taskProp) {
+      try {
+        let res = await api.delete('tasks/' + taskProp.taskId + "/comments/" + taskProp.commentId)
+        dispatch('getTasksByListId', res.data.listId)
+      } catch (error) { console.log(error) };
+    }
   }
-})
+
+},
+)

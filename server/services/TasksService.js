@@ -2,6 +2,7 @@ import { dbContext } from "../db/DbContext";
 import { BadRequest } from "../utils/Errors";
 
 class TasksService {
+
     // async getAll(userEmail) {
     //     return await dbContext.Lists.find({ creatorEmail: userEmail }).populate("creator", "name picture")
     // }
@@ -34,5 +35,23 @@ class TasksService {
         }
     }
 
+    async createComment(body, id) {
+        let task = await dbContext.Tasks.findById(id);
+        if (!task) {
+            throw new BadRequest("Invalid Id")
+        }
+        task.comments.push(body);
+        await task.save()
+        return task
+    }
+    async deleteComment(id, commentId) {
+        let task = await dbContext.Tasks.findById(id);
+        if (!task) {
+            throw new BadRequest("Invalid Id")
+        }
+        task.comments = task.comments.filter(c => c._id != commentId)
+        await task.save()
+        return task
+    }
 }
 export const taskService = new TasksService()

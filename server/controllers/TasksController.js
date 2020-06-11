@@ -13,8 +13,10 @@ export class TasksController extends BaseController {
             // NOTE: Beyond this point all routes require Authorization tokens (the user must be logged in)
             .use(auth0provider.getAuthorizedUserInfo)
             .post('', this.createTask)
+            .post('/:id/comments', this.addComment)
             .put('/:id', this.editTask)
             .delete('/:id', this.deleteTask)
+            .delete('/:id/comments/:commentId', this.deleteComment)
     }
     // async getAll(req, res, next) {
     //     try {
@@ -51,6 +53,22 @@ export class TasksController extends BaseController {
         try {
             await taskService.deleteTask(req.params.id, req.userInfo.email)
             return res.send("Successfully deleted")
+        } catch (error) { next(error) }
+    }
+
+    async addComment(req, res, next) {
+        try {
+            req.body.creatorEmail = req.userInfo.email
+            let data = await taskService.createComment(req.body, req.params.id)
+            return res.status(201).send(data)
+        } catch (error) { next(error) }
+    }
+
+    async deleteComment(req, res, next) {
+        try {
+            req.body.creatorEmail = req.userInfo.email
+            let data = await taskService.deleteComment(req.params.id, req.params.commentId)
+            return res.status(201).send(data)
         } catch (error) { next(error) }
     }
 }

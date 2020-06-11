@@ -28,7 +28,7 @@
           <form class="form col-12 d-flex flex-column" @submit.prevent="createComment">
             <div class="form-group">
               <input type="text" name="title" id="title" class="form-control " placeholder="new comment.."
-                v-model="newComment.title" />
+                v-model="newComment.body" />
             </div>
             <div class="form-group align-self-center">
               <button type="submit" class="border border-warning text-warning shadow m-auto btn btn-success">
@@ -42,6 +42,11 @@
           </form>
         </div>
       </div>
+      <div class="row">
+        <div v-for="comment in tasksProp.comments" :key="comment._id"><b>{{comment.body}}<i
+              class="pointer text-warning fas fa-trash-alt float-right" @click="deleteComment(comment._id)"></i></b>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -53,17 +58,25 @@
     data() {
       return {
         commentForm: false,
-        newComment: {}
+        newComment: { taskId: this.tasksProp.id }
       }
     },
-    computed: {},
+    computed: {
+
+
+    },
     methods: {
       deleteTask() {
         this.$store.dispatch("deleteTask", this.tasksProp)
       },
       createComment() {
         this.$store.dispatch("createComment", this.newComment);
-        this.newComment = {};
+        this.newComment = { task: this.tasksProp.id };
+      },
+      deleteComment(commentId) {
+        let newCom = { taskId: this.tasksProp.id, commentId: commentId }
+        console.log(newCom)
+        this.$store.dispatch('deleteComment', newCom)
       }
     },
     components: {
