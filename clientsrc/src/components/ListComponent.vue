@@ -1,21 +1,23 @@
 <template>
-  <div class="ListComponent row text-left">
-    <div class="col shadow mx-1 list-container rounded border border-danger bg-secondary">
+  <div class="ListComponent col-4 text-left">
+    <div class="shadow p-3 mx-1 list-container rounded border border-danger bg-secondary">
       <div class="row mt-2">
         <div class="col-7">
-          <p>list.title</p>
+          <p>{{listProp.title}}</p>
         </div>
         <div class="col-5">
           <span>
             <i class="pointer text-warning fas fa-plus mx-2" @click="taskForm =! taskForm"></i>
             <i class="pointer mx-2 fas fa-chevron-circle-right text-warning"></i>
-            <i class="pointer ml-2 fas fa-trash-alt text-warning"></i>
+            <!-- TODO Wire this up to delete -->
+            <i class="pointer ml-2 fas fa-trash-alt text-warning" @click="deleteList"></i>
           </span>
         </div>
         <div class="col-12" v-if="taskForm">
           <form class="form col-12 d-flex flex-column" @submit.prevent="createTask">
             <div class="form-group">
-              <input type="text" name="title" id="title" class="form-control shadow" placeholder="new task.." />
+              <input type="text" name="title" id="title" class="form-control shadow" placeholder="new task.."
+                v-model="newTask.title" />
             </div>
             <div class="form-group align-self-center">
               <button type="submit" class="border border-success text-success shadow mr-1 ml-2 btn btn-warning">
@@ -30,7 +32,7 @@
         </div>
       </div>
       <hr />
-
+      <taskcomponent v-for="task in tasks" :tasksProp="task" />
     </div>
   </div>
 </template>
@@ -40,23 +42,32 @@
   export default {
     name: "ListComponent",
     props: ["listProp"],
+    mounted() {
+      this.$store.dispatch("getTasksByListId")
+    },
     data() {
       return {
         taskForm: false,
-        newTask: {}
+        newTask: { listId: this.listProp.id, }
       };
     },
     computed: {
-      lists() {
-        return this.$store.state.lists
+      tasks() {
+        return this.$store.state.tasks[this.listProp.id]
       }
     },
     methods: {
+      deleteList() {
+        this.$store.dispatch("deleteList", this.listProp)
+      },
       createTask() {
         this.$store.dispatch("createTask", this.newTask);
-        this.newTask = {};
+        this.newTask = { listId: this.listProp.id, };
       }
-    }
+    },
+    components: {
+      TaskComponent
+    },
   };
 </script>
 <style scoped>

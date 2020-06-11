@@ -2,7 +2,6 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import Axios from 'axios'
 import router from '../router/index'
-import { get } from 'mongoose'
 
 Vue.use(Vuex)
 
@@ -21,7 +20,7 @@ export default new Vuex.Store({
     boards: [],
     activeBoard: {},
     lists: [],
-    tasks: [],
+    tasks: {},
     comments: []
 
   },
@@ -48,6 +47,14 @@ export default new Vuex.Store({
       console.log(state.lists)
       state.lists.push(data)
     },
+    deleteList(state, id) {
+      state.lists = state.lists.filter(l => l.id != id)
+    },
+    setTasks(state, data) {
+      // NOTE we want to add a property to the dictionary where the key is listID and the value is the array of tasks for that list
+      // state.tasks[data.listId] = data.tasks
+      Vue.set(state.tasks, data.listId, data.tasks)
+    }
   },
   actions: {
     //#region -- AUTH STUFF --
@@ -103,12 +110,13 @@ export default new Vuex.Store({
 
 
     //#region -- LISTS --
-    getListsByBoardId({ commit, dispatch }, boardId) {
-      api.get('boards/' + boardId + "/lists")
-        .then(res => {
-          commit('setLists', res.data)
-        })
+    async getListsByBoardId({ commit, dispatch }, boardId) {
+      try {
+        let res = await api.get('boards/' + boardId + "/lists")
+        commit('setLists', res.data)
+      } catch (error) { console.log(error) };
     },
+
     async createList({ commit, dispatch }, newlist) {
       try {
         let res = await api.post('lists/', newlist)
@@ -117,8 +125,37 @@ export default new Vuex.Store({
         console.error(error)
       }
 
-    }
+    },
+
+    async deleteList({ commit, dispatch }, list) {
+      try {
+        let res = await api.delete('lists/' + list.id)
+        commit("deleteList", res.data)
+        dispatch('getListsByBoardId', list.boardId)
+      } catch (error) {
+        console.log(error);
+      }
+    },
 
     //#endregion
+
+    //#region -- TASKS --
+    async getTasksByListId({ commit, dispatch }, listId) {
+      try {
+        let res = await api.get('lists/' + listId + "/tasks")
+        commit("setTasks", { listId, tasks: res.data })
+      } catch (error) {
+        console.error(error)
+      }
+    },
+    async createTask({ commit, dispatch }, newTask) {
+      try {
+        let res = await api.post('tasks/', newTask)
+        dispatch('getTasksByListId', newTask.listId)
+      } catch (error) {
+        console.error(error)
+      }
+
+    },
   }
 })
