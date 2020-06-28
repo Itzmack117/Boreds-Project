@@ -1,4 +1,4 @@
-export const domain = "mack-demo.auth0.com";
-export const audience = "https://BoredsApi";
-export const clientId = "U5MPJ3vAJLnVvR3PBSYAF2HnGzrQbXRZ";
+export const domain = "spenserdavies.auth0.com";
+export const audience = "https://bored";
+export const clientId = "trtOjhlDidOnOxBQkOrcQ8fjSoDM87ih";
 //
